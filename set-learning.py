@@ -17,3 +17,14 @@ print employees
 
 print engineers.issubset(employees)
 
+print {1, 3, 2}
+
+print {c * 4 for c in 'SPAM'}
+
+keys = ["x","y","z"]
+vals = [1,2,3]
+print zip(keys,vals)
+
+print {key: val for (key,val) in zip(keys, vals)}
+
+print dict(zip(keys, vals))

@@ -16,6 +16,12 @@ print "Local formatted current time :", formatted_time
 
 print "cpu current time: ", time.clock()
 
+def timer(func, *args):
+    start = time.clock()
+    for i in range(1000):
+        func(*args)
+    return time.clock() - start
+
 time.sleep(2)
 
 print time.timezone
