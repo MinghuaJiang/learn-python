@@ -37,28 +37,6 @@ emp1.displayEmployee()
 emp2.displayEmployee()
 print "Total Employee %d" % Employee.empCount
 
-
-class Vector:
-    __x = 1
-
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
-
-    def __str__(self):
-        return 'Vector (%d, %d)' % (self.a, self.b)
-
-    def __add__(self, other):
-        return Vector(self.a + other.a, self.b + other.b)
-
-
-v1 = Vector(2, 10)
-v2 = Vector(5, -2)
-print v1 + v2
-
-#hidden attribute, will raise error
-#print v2.__x
-
 class AttrDisplay:
 
     def gatherAttrs(self):
@@ -117,6 +95,21 @@ class Department:
         for person in self.members:
             print(person)
 
+class PrivateExc(Exception): pass
+class Privacy:
+    def __setattr__(self, attrname, value):
+        if attrname in self.privates:
+            raise PrivateExc(attrname, self)
+        else:
+            self.__dict__[attrname] = value
+
+class Test1(Privacy):
+    privates = ['age']
+class Test2(Privacy):
+    privates = ['name', 'pay']
+    def __init__(self):
+        self.__dict__['name'] = 'Tom'
+
 if __name__ == '__main__':
     bob = Person('Bob Smith')
     # Test the class
@@ -137,3 +130,13 @@ if __name__ == '__main__':
     development.addMember(tom)
     development.giveRaises(.10)
     development.showAll()
+    x = Test1()
+    y = Test2()
+    x.name = 'Bob'
+    # y.name = 'Sue'
+    print(x.name)  # Works
+    # Fails
+    y.age = 30
+    # x.age = 40
+    print(y.age)  # Works
+    # Fails
