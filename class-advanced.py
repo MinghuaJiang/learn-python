@@ -5,7 +5,7 @@ class tracer:
     # Remember original, init counter
         self.calls = 0
         self.func = func
-        
+
     def __call__(self, *args):
         # On later calls: add logic, run original
         self.calls += 1
