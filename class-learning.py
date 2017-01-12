@@ -35,6 +35,7 @@ t(object1, 'howdy')
 
 
 class Super():
+    __metaclass__=ABCMeta
     def method(self):
         print('in Super.method')
 

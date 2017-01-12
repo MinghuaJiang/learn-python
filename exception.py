@@ -1,8 +1,9 @@
 try:
     print "hello world"
-    raise RuntimeError
 except RuntimeError:
     print "error handled"
+else:
+    print "no exception occurred"
 finally:
     print "do finally"
 
